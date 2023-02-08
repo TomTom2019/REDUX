@@ -2,7 +2,7 @@
 /* 2 the way to export dispatch action*/
 import {useSelector, useDispatch} from 'react-redux'
 import { addMovie } from './store/movies'
-import {setType} from './store/users'
+import {setType, fechUsers/*getUsers*/} from './store/users'
 
 
 
@@ -37,6 +37,8 @@ console.log(movies)
       <button onClick={()=>dispatch(setType('Admin'))} >
         Set type
       </button>
+      <hr/>
+      <button onClick={()=>dispatch(fechUsers())} >Get users</button>
     </>
   )
 }
