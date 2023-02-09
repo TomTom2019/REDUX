@@ -4,34 +4,47 @@ import axios from 'axios'
 /*createAsyncThunk is woking outside
 users is the key name here. fechUsers is the name reducer
 */
-
+//8
 export const fechUsers = createAsyncThunk(
  'users/fechUsers',
-  async(thunkAPI)=>{
-  const res = await axios.get('https://jsonplaceholder.typicode.com/users')
-  .then(response => response.data);
+     /* obj is first argument thunkAPI is second argument
 
-  return res
+     */
+  async(obj,thunkAPI)=>{
+  /*	you get everything from index store*/
+  /*	console.log(thunkAPI.getState())
+  	thunkAPI.dispatch(testAsyncDispatch())*/
+  	try{
+  		  const res = await axios.get(`https://jsonplaceholder.typicode.com/users`)
+       /*.then(response => response.data);*/
 
+  return res.data
+ }catch(err){
+     return err
  }
 
-	)
+	}
 
+  	)
 
-
-
-
+/*be careful with correct spelling here i wrote user instead of users*/
 export const userSlice = createSlice({
 	name:'users',
 	initialState:{
 		type:'Guest',
-		user:['']
+		users:[],
+		loading:false
+		/*test:false*/
 	},
 	reducers:{
 			/*reducer and action are in the same spot  setType is the on to export*/
 		setType:(state,action)=>{
 			state.type = action.payload || 'Guest'
 		},
+		/*this one trigger line 8*/
+		/*testAsyncDispatch:(state)=>{
+          state.test = true
+		}*/
 	/*	use axios to database - take time to be resolved
       this code is syncro . with createAsyncThunk this code dosn't work
 	*/
@@ -48,13 +61,13 @@ export const userSlice = createSlice({
 	/*extraReducers is asynk thunk*/
 	extraReducers:(builder)=>{
 		builder.addCase(fechUsers.pending,(state)=>{
-			console.log('pending')
+			state.loading = true
 		})
 		/* fulfilled when everything is result + call back function
            you can code only fulfilled no need pending and rejected
 		*/
 		.addCase(fechUsers.fulfilled,(state,action)=>{
-            console.log('fulfilled')
+             state.loading = false
             /*console.log(action.payload)*/
             state.users = action.payload
 		})
@@ -66,6 +79,6 @@ export const userSlice = createSlice({
 
 })
 
-export const {setType,/*getUsers*/} = userSlice.actions
+export const {setType,testAsyncDispatch } = userSlice.actions
 
 export default userSlice.reducer
