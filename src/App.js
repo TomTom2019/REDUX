@@ -1,5 +1,6 @@
 /*HOOK REDUX you can get data or store data*/
 /* 2 the way to export dispatch action*/
+import { useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { addMovie } from './store/movies'
 import {setType, fechUsers/*getUsers*/} from './store/users'
@@ -13,6 +14,18 @@ const movies = useSelector((state)=> state.movies.list)
 const users = useSelector((state)=>state.users)
 const dispatch = useDispatch()
 
+/*you can use  same as ligne 54 here unwrap use then and catch */
+ useEffect(()=>{
+dispatch(fechUsers())
+.unwrap()
+.then((response)=>{
+
+ console.log(response)
+})
+.catch(error =>{
+  console.log(error)
+})
+ },[])
 
 
 
@@ -46,8 +59,8 @@ const dispatch = useDispatch()
       
 
      
-
-      <button onClick={() => dispatch(fechUsers())}>Get users</button>
+     {/*54*/}
+      {/*<button onClick={() => dispatch(fechUsers())}>Get users</button>*/}
       
     </>
   )

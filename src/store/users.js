@@ -10,12 +10,12 @@ export const fechUsers = createAsyncThunk(
      /* obj is first argument thunkAPI is second argument
 
      */
-  async(obj,thunkAPI)=>{
+  async(obj,thunkAPI,)=>{
   /*	you get everything from index store*/
   /*	console.log(thunkAPI.getState())
   	thunkAPI.dispatch(testAsyncDispatch())*/
   	try{
-  		  const res = await axios.get(`https://jsonplaceholder.typicode.com/users`)
+  		  const res = await axios.get(`https://jsonplaceholder.typicode.com/users/`)
        /*.then(response => response.data);*/
 
   return res.data
