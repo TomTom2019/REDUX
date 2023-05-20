@@ -1,14 +1,10 @@
-
-
-const App = () =>{
-
+const App = () => {
 
   return(
     <>
-
+      APP
     </>
-
-    )
+  )
 }
 
-export default App
+export default App;
