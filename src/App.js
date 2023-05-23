@@ -1,9 +1,11 @@
-//GET DATA
-import {useSelector} from 'react-redux'
+//GET DATA // usedispath = action
+import {useSelector,useDispatch} from 'react-redux'
+import {addMovie} from './store/movies'
 
 // movies is key from reducer
 const App = () => {
  const movies = useSelector((state)=> state.movies.list)
+ const dispatch = useDispatch()
 
 console.log(movies)
 // show data with loop with 

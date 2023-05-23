@@ -10,11 +10,17 @@ export const moviesSlice = createSlice({
          {id:2,title:'Superman'}
 			]
 	},
-     reducers:{
 
+/*	This is reducer and action combien*/
+     reducers:{
+       addMovie:(state)=>{
+       	const newMovie ={id:3,title:'batman'}
+       	state.list = [...state.list,newMovie]
+       }
      }
 
-})
+  })
 
 
+export const {addMovie} = moviesSlice.actions
 export default moviesSlice.reducer
