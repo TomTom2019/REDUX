@@ -21,6 +21,8 @@ console.log(movies)
 
         :null}
       </ul>
+      <hr/>
+      <button onClick={()=>dispatch(addMovie())}>Add movie</button>
     </>
   )
 }
