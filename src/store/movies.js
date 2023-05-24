@@ -12,10 +12,11 @@ export const moviesSlice = createSlice({
 	},
 
 /*	This is reducer and action combien*/
+/*	argument (action) work with payload*/
      reducers:{
-       addMovie:(state)=>{
-       	const newMovie ={id:3,title:'batman'}
-       	state.list = [...state.list,newMovie]
+       addMovie:(state,action)=>{
+       	//const newMovie ={id:3,title:'batman'}
+       	state.list = [...state.list,action.payload]
        }
      }
 
