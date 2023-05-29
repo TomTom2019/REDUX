@@ -27,7 +27,13 @@ const App = () => {
       <h3>user type:{users.type} </h3>
       <button onClick={() => dispatch(setType("Admin"))}>setType</button>
       <hr/>
-      <button onClick={()=> dispatch(fetchUsers())}>get user</button>
+      <div>
+        {users.loading ? 'loading':null}
+      </div>
+    
+      
+
+      <button onClick={()=> dispatch(fetchUsers({}))}>get user</button>
     </>
   );
 };
