@@ -1,56 +1,53 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from 'axios'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 /* thunkAPI get state- everything on redux store  */
 export const fetchUsers = createAsyncThunk(
-    "users/fetchUsers",
-    async (obj,thunkAPI) => {
- /*       console.log(thunkAPI.getState())
-        thunkAPI.dispatch(testAsyncDispatch())*/
-        try {
-            const res = await axios.get(
-                "https://jsonplaceholder.typicode.com/users"
-            );
+    'users/fetchUsers',
+    async(obj,thunkAPI)=>{
+        // console.log(thunkAPI.getState())
+        // thunkAPI.dispatch(testAsyncDispatch())
+        try{
+            const res = await axios.get(`https://jsonplaceholder.typicode.com/users`)
 
             return res.data
-        } catch (err) {
-            return err;
+        } catch(err){
+            return err
         }
     }
-);
+)
 
-export const userSlice = createSlice({
-    name: "users",
-    initialState: {
-        type: "Guest",
-        user: [],
+export const usersSlice = createSlice({
+    name:'users',
+    initialState:{
+        type:'Guest',
+        users:[],
         loading:false
-      /*  test:false*/
+        //test:false
     },
-    reducers: {
-        setType: (state, action) => {
-            state.type = action.payload || "Guest";
+    reducers:{
+        setType:(state,action)=>{
+            state.type = action.payload || 'Guest'
         },
-    /*    testAsyncDispatch:(state)=>{
-         state.test = true
-        }*/
+        // testAsyncDispatch:(state)=>{
+        //     state.test = true
+        // }
     },
-
- /*   */
     extraReducers:(builder)=>{
         builder
         .addCase(fetchUsers.pending,(state)=>{
-            console.log('pending')
+           state.loading = true;
         })
         .addCase(fetchUsers.fulfilled,(state,action)=>{
-            console.log('fulfilled')
-            state.user = action.payload
+            state.loading = false;
+            state.users = action.payload;
         })
-           .addCase(fetchUsers.rejected,(state)=>{
+        .addCase(fetchUsers.rejected,(state)=>{
             console.log('rejected')
         })
     }
-});
+})
 
-export const { setType,testAsyncDispatch } = userSlice.actions;
-export default userSlice.reducer;
+
+export const {setType,testAsyncDispatch} = usersSlice.actions;
+export default usersSlice.reducer;
